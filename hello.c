@@ -9,12 +9,12 @@ int main(int argc, char *argv[]) {
 
     int n = atoi(argv[1]);
     if (n <= 0) {
-        fprintf(stderr, "Número inválido de repetições.\n");
+        fprintf(stderr, "Numero invalido de repeticoes.\n");
         return 1;
     }
 
     for (int i = 1; i <= n; i++) {
-        printf("Repetição %d: Hello World!\n", i);
+        printf("Repeticao %d: Hello World!\n", i);
     }
 
     return 0;
