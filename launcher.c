@@ -18,7 +18,8 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < n; i++) {
         pid_t pid = fork();
         if (pid == 0) {
-            execl("./hello", "hello", (char *)NULL);
+            // Cada processo filho executa o hello
+            execl("./hello", "hello", NULL);
             write(2, "Erro no exec\n", 13);
             exit(1);
         } else if (pid < 0) {
