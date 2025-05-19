@@ -5,25 +5,28 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        write(2, "Uso: ./launcher <num_processos>\n", 33);
+        fprintf(stderr, "Uso: %s <num_processos>\n", argv[0]);
         return 1;
     }
 
     int n = atoi(argv[1]);
     if (n <= 0) {
-        write(2, "Número inválido de processos.\n", 30);
+        fprintf(stderr, "Número inválido de processos.\n");
         return 1;
     }
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         pid_t pid = fork();
         if (pid == 0) {
-            // Cada processo filho executa o hello
-            execl("./hello", "hello", NULL);
-            write(2, "Erro no exec\n", 13);
+            // Processo filho
+            char reps[10];
+            sprintf(reps, "%d", i * 2); // Cada processo repete i*2 vezes
+
+            execl("./hello", "hello", reps, NULL);
+            perror("exec");
             exit(1);
         } else if (pid < 0) {
-            write(2, "Erro no fork\n", 13);
+            perror("fork");
             return 1;
         }
     }
